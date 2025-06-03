@@ -16,12 +16,12 @@
                 },
                 {
                     "name": "Look",
-                    "type": "Value",
-                    "id": "b945d22d-dd07-47eb-af24-570b74b96130",
+                    "type": "PassThrough",
+                    "id": "df76d797-ab01-4039-aafd-04327106a6a6",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -82,8 +82,8 @@
                 },
                 {
                     "name": "",
-                    "id": "c3135145-c5c9-4e25-8216-c01565a5238e",
-                    "path": "",
+                    "id": "f6e401b8-33a3-4f63-b116-54f6eb8525af",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
