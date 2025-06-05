@@ -88,7 +88,7 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
     ""name"": ""Input_Actions"",
     ""maps"": [
         {
-            ""name"": ""Player_Walk"",
+            ""name"": ""Player"",
             ""id"": ""a7ca494a-986b-4864-ac6e-e99e1b96896d"",
             ""actions"": [
                 {
@@ -98,11 +98,11 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""df76d797-ab01-4039-aafd-04327106a6a6"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -168,7 +168,7 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""481340ab-2eab-40c4-8e11-fe14f5609ffa"",
+                    ""id"": ""f6e401b8-33a3-4f63-b116-54f6eb8525af"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -188,11 +188,16 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Keyboard"",
-            ""bindingGroup"": ""Keyboard"",
+            ""name"": ""KeyboardAndMouse"",
+            ""bindingGroup"": ""KeyboardAndMouse"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -200,17 +205,17 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Player_Walk
-        m_Player_Walk = asset.FindActionMap("Player_Walk", throwIfNotFound: true);
-        m_Player_Walk_Move = m_Player_Walk.FindAction("Move", throwIfNotFound: true);
-        m_Player_Walk_Look = m_Player_Walk.FindAction("Look", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
 
     ~@Input_Actions()
     {
-        UnityEngine.Debug.Assert(!m_Player_Walk.enabled, "This will cause a leak and performance issues, Input_Actions.Player_Walk.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Input_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, Input_Actions.UI.Disable() has not been called.");
     }
 
@@ -284,34 +289,34 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player_Walk
-    private readonly InputActionMap m_Player_Walk;
-    private List<IPlayer_WalkActions> m_Player_WalkActionsCallbackInterfaces = new List<IPlayer_WalkActions>();
-    private readonly InputAction m_Player_Walk_Move;
-    private readonly InputAction m_Player_Walk_Look;
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Look;
     /// <summary>
-    /// Provides access to input actions defined in input action map "Player_Walk".
+    /// Provides access to input actions defined in input action map "Player".
     /// </summary>
-    public struct Player_WalkActions
+    public struct PlayerActions
     {
         private @Input_Actions m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public Player_WalkActions(@Input_Actions wrapper) { m_Wrapper = wrapper; }
+        public PlayerActions(@Input_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Player_Walk/Move".
+        /// Provides access to the underlying input action "Player/Move".
         /// </summary>
-        public InputAction @Move => m_Wrapper.m_Player_Walk_Move;
+        public InputAction @Move => m_Wrapper.m_Player_Move;
         /// <summary>
-        /// Provides access to the underlying input action "Player_Walk/Look".
+        /// Provides access to the underlying input action "Player/Look".
         /// </summary>
-        public InputAction @Look => m_Wrapper.m_Player_Walk_Look;
+        public InputAction @Look => m_Wrapper.m_Player_Look;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Player_Walk; }
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -319,9 +324,9 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="Player_WalkActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="PlayerActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(Player_WalkActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -329,11 +334,11 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="Player_WalkActions" />
-        public void AddCallbacks(IPlayer_WalkActions instance)
+        /// <seealso cref="PlayerActions" />
+        public void AddCallbacks(IPlayerActions instance)
         {
-            if (instance == null || m_Wrapper.m_Player_WalkActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_Player_WalkActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -348,8 +353,8 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="Player_WalkActions" />
-        private void UnregisterCallbacks(IPlayer_WalkActions instance)
+        /// <seealso cref="PlayerActions" />
+        private void UnregisterCallbacks(IPlayerActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
@@ -360,12 +365,12 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="Player_WalkActions.UnregisterCallbacks(IPlayer_WalkActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />.
         /// </summary>
-        /// <seealso cref="Player_WalkActions.UnregisterCallbacks(IPlayer_WalkActions)" />
-        public void RemoveCallbacks(IPlayer_WalkActions instance)
+        /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
+        public void RemoveCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_Player_WalkActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -375,21 +380,21 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="Player_WalkActions.AddCallbacks(IPlayer_WalkActions)" />
-        /// <seealso cref="Player_WalkActions.RemoveCallbacks(IPlayer_WalkActions)" />
-        /// <seealso cref="Player_WalkActions.UnregisterCallbacks(IPlayer_WalkActions)" />
-        public void SetCallbacks(IPlayer_WalkActions instance)
+        /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
+        /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
+        /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
+        public void SetCallbacks(IPlayerActions instance)
         {
-            foreach (var item in m_Wrapper.m_Player_WalkActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_Player_WalkActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="Player_WalkActions" /> instance referencing this action map.
+    /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
     /// </summary>
-    public Player_WalkActions @Player_Walk => new Player_WalkActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -475,25 +480,25 @@ public partial class @Input_Actions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="UIActions" /> instance referencing this action map.
     /// </summary>
     public UIActions @UI => new UIActions(this);
-    private int m_KeyboardSchemeIndex = -1;
+    private int m_KeyboardAndMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
     /// </summary>
     /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
-    public InputControlScheme KeyboardScheme
+    public InputControlScheme KeyboardAndMouseScheme
     {
         get
         {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
+            if (m_KeyboardAndMouseSchemeIndex == -1) m_KeyboardAndMouseSchemeIndex = asset.FindControlSchemeIndex("KeyboardAndMouse");
+            return asset.controlSchemes[m_KeyboardAndMouseSchemeIndex];
         }
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player_Walk" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="Player_WalkActions.AddCallbacks(IPlayer_WalkActions)" />
-    /// <seealso cref="Player_WalkActions.RemoveCallbacks(IPlayer_WalkActions)" />
-    public interface IPlayer_WalkActions
+    /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
+    /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
+    public interface IPlayerActions
     {
         /// <summary>
         /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.

@@ -2,7 +2,7 @@
     "name": "Input_Actions",
     "maps": [
         {
-            "name": "Player_Walk",
+            "name": "Player",
             "id": "a7ca494a-986b-4864-ac6e-e99e1b96896d",
             "actions": [
                 {
@@ -12,11 +12,11 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Look",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "df76d797-ab01-4039-aafd-04327106a6a6",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -82,7 +82,7 @@
                 },
                 {
                     "name": "",
-                    "id": "481340ab-2eab-40c4-8e11-fe14f5609ffa",
+                    "id": "f6e401b8-33a3-4f63-b116-54f6eb8525af",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
@@ -102,11 +102,16 @@
     ],
     "controlSchemes": [
         {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
+            "name": "KeyboardAndMouse",
+            "bindingGroup": "KeyboardAndMouse",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
