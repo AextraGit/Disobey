@@ -11,7 +11,7 @@ public class Player_Movement : MonoBehaviour
     public Rigidbody rb;
 
     public float moveSpeed = 1;
-    Vector2 inputDirectionVector;
+    private Vector2 inputDirectionVector;
 
     private void Start()
     {
