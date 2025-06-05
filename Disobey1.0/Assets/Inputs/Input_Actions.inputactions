@@ -12,7 +12,7 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Look",
@@ -21,7 +21,7 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -82,7 +82,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f6e401b8-33a3-4f63-b116-54f6eb8525af",
+                    "id": "481340ab-2eab-40c4-8e11-fe14f5609ffa",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
