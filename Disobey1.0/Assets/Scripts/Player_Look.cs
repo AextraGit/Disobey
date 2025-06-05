@@ -10,6 +10,7 @@ public class Player_Look : MonoBehaviour
 
     public float sensitivity = 30f;
     public Transform cameraTransform;
+    public Transform playerTransform;
 
     float maxYRotation = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,6 +31,7 @@ public class Player_Look : MonoBehaviour
         maxYRotation = Mathf.Clamp(maxYRotation, -90f, 90f); // Ensuring y doesnt go any further than 90° for feels
         cameraTransform.transform.localRotation = Quaternion.Euler(maxYRotation, 0f, 0f);
         transform.Rotate(0f, deltaX, 0f); //.y, .x, .z I presume
+        //playerTransform.Rotate(0f, deltaX, 0f);
 
         Debug.Log($"Mouse Delta: {value}, deltaX (vertical): {deltaX}, deltaY (horizontal): {deltaY}");
     }

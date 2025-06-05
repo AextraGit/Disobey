@@ -480,6 +480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 100
   cameraTransform: {fileID: 2063527815}
+  playerTransform: {fileID: 1198099249}
 --- !u!1 &1392933424
 GameObject:
   m_ObjectHideFlags: 0
