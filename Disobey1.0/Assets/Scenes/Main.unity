@@ -478,9 +478,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 264c9911cdc85094cafac2a6c44bf551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 20
-  cameraTransform: {fileID: 2063527815}
-  playerTransform: {fileID: 1198099249}
+  sensitivity: 30
+  cameraTransform: {fileID: 0}
+  playerTransform: {fileID: 0}
 --- !u!1 &1392933424
 GameObject:
   m_ObjectHideFlags: 0

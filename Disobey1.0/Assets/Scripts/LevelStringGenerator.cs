@@ -7,13 +7,12 @@ using UnityEngine;
 using UnityEngine.Windows;
 using static UnityEngine.UI.Image;
 
-public class Level_Grammar : MonoBehaviour
+public class LevelStringGenerator : MonoBehaviour
 {
     void Start()
     {
-        Level_Grammar generator = new Level_Grammar();
+        LevelStringGenerator generator = new LevelStringGenerator();
 
-        // Beispielwerte für das Level
         int mainStreetLength = 3;
         int sideStreetDepth = 2;
         int lootCount = 2;
@@ -54,13 +53,12 @@ public class Level_Grammar : MonoBehaviour
     ///                  e
     ///                  |
     ///
-    /// roads can generate into each other (needs to be handled by map generator)
+    /// streets can generate into each other (needs to be handled by map generator)
     public string GenerateString(int size, int depth, int loot, int enemy)
     {
+        string word = "s" + "(" + GenerateSideStreet(depth) + ")" + "(" + GenerateMainStreet(size, depth) + ")" + "(" + GenerateSideStreet(depth) + ")";
 
-        String word = "s" + "(" + GenerateSideStreet(depth) + ")" + "(" + GenerateMainStreet(size, depth) + ")" + "(" + GenerateSideStreet(depth) + ")";
-
-        // TODO: ersetzen einzelner componente mit loot/enemy
+        // TODO: ersetzen einzelner Komponente mit Loot/Enemy
 
         return word;
     }
@@ -69,76 +67,52 @@ public class Level_Grammar : MonoBehaviour
     {
         if (size <= 0) return "b";
 
-        String component = "c";
+        string component = "c";
 
         int nextMainStreetDirection = IntersectionStreetRandomizer(70);
         switch (nextMainStreetDirection)
         {
             case 0:
-                // left
                 return component + "(" + GenerateMainStreet(size - 1, depth) + ")" + "(" + GenerateSideStreet(depth) + ")" + "(" + GenerateSideStreet(depth) + ")";
-        break;
-
             case 1:
-                // middle
                 return component + "(" + GenerateSideStreet(depth) + ")" + "(" + GenerateMainStreet(size - 1, depth) + ")" + "(" + GenerateSideStreet(depth) + ")";
-                break;
-
             case 2:
-                // right
                 return component + "(" + GenerateSideStreet(depth) + ")" + "(" + GenerateSideStreet(depth) + ")" + "(" + GenerateMainStreet(size - 1, depth) + ")";
-                break;
         }
-        return "b";
 
+        return "b";
     }
 
     private string GenerateSideStreet(int depth)
     {
         if (depth <= 0 || IsWallRandomizer(60)) return "w";
 
-        String component = "c";
+        string component = "c";
 
-        int numberOfStreets = UnityEngine.Random.Range(1, 3); //randomized number of new streets (between 1 or 2)
-        int nextStreetDirection = IntersectionStreetRandomizer(50); // randomized which way the street continues
+        int numberOfStreets = UnityEngine.Random.Range(1, 3);
+        int nextStreetDirection = IntersectionStreetRandomizer(50);
 
         if (numberOfStreets == 1)
         {
             switch (nextStreetDirection)
             {
                 case 0:
-                    // left (is street)
                     return component + "(" + GenerateSideStreet(depth - 1) + ")" + "(w)" + "(w)";
-                    break;
-
                 case 1:
-                    // middle (is street)
                     return component + "(w)" + "(" + GenerateSideStreet(depth - 1) + ")" + "(w)";
-                    break;
-
                 case 2:
-                    // right (is street)
                     return component + "(w)" + "(w)" + "(" + GenerateSideStreet(depth - 1) + ")";
-                    break;
             }
         }
-        //else 2 continuations
+
         switch (nextStreetDirection)
         {
             case 0:
-                // left (is wall)
                 return component + "(w)" + "(" + GenerateSideStreet(depth - 1) + ")" + "(" + GenerateSideStreet(depth - 1) + ")";
-                break;
-
             case 1:
-                // middle (is wall)
                 return component + "(" + GenerateSideStreet(depth - 1) + ")" + "(w)" + "(" + GenerateSideStreet(depth - 1) + ")";
-                break;
-
             case 2:
-                // right (is wall)
                 return component + "(" + GenerateSideStreet(depth - 1) + ")" + "(" + GenerateSideStreet(depth - 1) + ")" + "(w)";
-                break;
         }
 
         return "w";
@@ -153,13 +127,16 @@ public class Level_Grammar : MonoBehaviour
     {
         int leftOrRightChance = 0;
         if (middleChance < 0 || middleChance > 100) return 1;
+
         if (middleChance % 2 == 0)
         {
             leftOrRightChance = (100 - middleChance) / 2;
-        } else
+        }
+        else
         {
             leftOrRightChance = (101 - middleChance) / 2;
         }
+
         int randomNumber = UnityEngine.Random.Range(1, 101);
         if (randomNumber <= leftOrRightChance) return 0;
         if (randomNumber <= leftOrRightChance + middleChance) return 1;
@@ -174,18 +151,18 @@ public class Level_Grammar : MonoBehaviour
     private bool IsWallRandomizer(int wallChance)
     {
         if (wallChance < 0 || wallChance > 100) return true;
+
         int randomNumber = UnityEngine.Random.Range(1, 101);
-        if (randomNumber <= wallChance) return true;
-        return false;
+        return randomNumber <= wallChance;
     }
 
 
-    private String ReplaceFirst(String word, String oldString, String replacement)
+    private string ReplaceFirst(string word, string oldString, string replacement)
     {
         int index = word.IndexOf(oldString);
         if (index == -1)
         {
-        return word;
+            return word;
         }
 
         return word.Substring(0, index) + replacement + word.Substring(index + oldString.Length);

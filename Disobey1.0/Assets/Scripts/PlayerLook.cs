@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using static UnityEngine.Rendering.DebugUI;
 
-public class Player_Look : MonoBehaviour
+public class PlayerLook : MonoBehaviour
 {
 
     public float sensitivity = 30f;
