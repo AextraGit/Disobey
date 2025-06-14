@@ -344,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 1198099245}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -379,7 +379,7 @@ Transform:
   m_GameObject: {fileID: 1272897667}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -479,8 +479,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 30
-  cameraTransform: {fileID: 0}
-  playerTransform: {fileID: 0}
+  cameraTransform: {fileID: 2063527815}
+  playerTransform: {fileID: 1198099249}
 --- !u!1 &1392933424
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +493,7 @@ GameObject:
   - component: {fileID: 1392933427}
   - component: {fileID: 1392933426}
   - component: {fileID: 1392933425}
+  - component: {fileID: 1392933429}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -584,12 +585,28 @@ Transform:
   m_GameObject: {fileID: 1392933424}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3.34, z: 0}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1392933429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392933424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d92267f3e9c1e84185ae238b0b38ffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  streetPrefab: {fileID: 2787716035333213250, guid: 4516d6430c0bbcc499b33d480cb265f6, type: 3}
+  intersectionPrefab: {fileID: 8057577526079513294, guid: c62eda9563e628b4fbbf02d2c48b5da0, type: 3}
+  streetOffset: 20
+  intersectionOffset: 17.5
 --- !u!1 &1615856514
 GameObject:
   m_ObjectHideFlags: 0
