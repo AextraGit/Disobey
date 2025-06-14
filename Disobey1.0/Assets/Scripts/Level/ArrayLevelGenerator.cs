@@ -1,63 +1,9 @@
-using System;
 using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
-using static UnityEngine.Rendering.HableCurve;
 
-public class LevelGenerator : MonoBehaviour
+public class ArrayLevelGenerator : MonoBehaviour
 {
     private string[,] level;
-    private string[,] levelArray;
-
-    public GameObject streetPrefab;
-    public GameObject intersectionPrefab;
-    public float streetOffset = 20f;
-    public float intersectionOffset = 17.5f;
-
-    void Start()
-    {
-        // Teste die GenerateArray-Methode mit den gewünschten Parametern
-        string[,] result = GenerateArray(length: 8, depth: 1, depthChance: 30, depthChanceReduction: 1, loot: 1, enemy: 1);
-
-        PrintLevel(result);
-
-        GenerateLevel(result);
-
-        PrintLevel(result);
-    }
-
-    void PrintLevel(string[,] array)
-    {
-        int rows = array.GetLength(0);
-        int cols = array.GetLength(1);
-
-        string output = "Level Map:\n";
-
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < cols; j++)
-            {
-                if (array[i, j] == null)
-                {
-                    output += "x   ";
-                }
-                else
-                {
-                    output += array[i, j] + "  ";
-                }
-
-                
-            }
-            output += "\n";
-        }
-
-        Debug.Log(output);
-    }
-
 
     /// <summary>
     /// This method generates a 2D array that can be used with the MapGenerator to generate a Level.
@@ -93,7 +39,7 @@ public class LevelGenerator : MonoBehaviour
     ///    |. . . . . e . .
     ///    |. . . . . + . .
     ///    |. . . . . . . .
-    private string[,] GenerateArray(int length, int depth, int depthChance, int depthChanceReduction, int loot, int enemy)
+    public string[,] GenerateArray(int length, int depth, int depthChance, int depthChanceReduction, int loot, int enemy)
     {
         level = new string[(depth * 2 + length) * 2 + 3, (length + depth) * 2 + 5]; // TODO: check if correct size
 
@@ -113,11 +59,12 @@ public class LevelGenerator : MonoBehaviour
         int columnOffset = 1;
         while (length > 0)
         {
-            if(columnOffset != 1)
+            if (columnOffset != 1)
             {
                 rowOffset = 0;
                 columnOffset = 1;
-            } else
+            }
+            else
             {
                 if (Randomize(50))
                 {
@@ -125,7 +72,8 @@ public class LevelGenerator : MonoBehaviour
                     {
                         rowOffset = 1;
                         columnOffset = 0;
-                    } else
+                    }
+                    else
                     {
                         rowOffset = -1;
                         columnOffset = 0;
@@ -155,85 +103,6 @@ public class LevelGenerator : MonoBehaviour
         // TODO: convert m to c and c to l/e
         return level;
     }
-    private void GenerateLevel(string[,] array)
-    {
-        levelArray = array;
-
-        float currentWorldPositionX = 0f;
-        float currentWorldPositionZ = 0f;
-
-        int currentRow = 0;
-        int currentColumn = 0;
-        // get the starting entry
-        for(int i = 0; i < levelArray.GetLength(0); i++)
-        {
-            if (levelArray[i, 0] != null)
-            {
-                currentRow = i;
-                break;
-            }
-        }
-        // instantiate start section (and intersection section)
-        Instantiate(streetPrefab, new Vector3(currentWorldPositionX, 0, currentWorldPositionZ), Quaternion.identity);
-        levelArray[currentRow, currentColumn] = null; // delete instantiated sections from array
-        currentWorldPositionX = currentWorldPositionX + (streetOffset + intersectionOffset);
-        Instantiate(intersectionPrefab, new Vector3(currentWorldPositionX, 0, currentWorldPositionZ), Quaternion.identity);
-        currentColumn++;
-        levelArray[currentRow, currentColumn] = null;
-
-        // go through street path with recursion and instantiate all sections
-        GenerateSections(currentRow, currentColumn, currentWorldPositionX, currentWorldPositionZ);
-
-    }
-
-    private void GenerateSections(int row, int column, float worldPositionX, float WorldPositionZ)
-    {
-        // TODO: if branch isnt used, generate wall. if no branch is used, remove intersection (or just place 3 walls)
-        if (levelArray[row - 1, column] != null) // check if up branch is used
-        {
-            Instantiate(streetPrefab, new Vector3(worldPositionX, 0, WorldPositionZ + (streetOffset + intersectionOffset)), Quaternion.Euler(0, -90, 0));
-            levelArray[row - 1, column] = null;
-            if (levelArray[row - 2, column] != null)
-            {
-                Instantiate(intersectionPrefab, new Vector3(worldPositionX, 0, WorldPositionZ + (streetOffset + intersectionOffset) * 2), Quaternion.Euler(0, -90, 0));
-                levelArray[row - 2, column] = null;
-                GenerateSections(row - 2, column, worldPositionX, WorldPositionZ + (streetOffset + intersectionOffset) * 2);
-            }
-        }
-        if (levelArray[row, column + 1] != null) // check if right branch is used
-        {
-            Instantiate(streetPrefab, new Vector3(worldPositionX + (streetOffset + intersectionOffset), 0, WorldPositionZ), Quaternion.identity);
-            levelArray[row, column + 1] = null;
-            if (levelArray[row, column + 2] != null)
-            {
-                Instantiate(intersectionPrefab, new Vector3(worldPositionX + (streetOffset + intersectionOffset) * 2, 0, WorldPositionZ), Quaternion.identity);
-                levelArray[row, column + 2] = null;
-                GenerateSections(row, column + 2, worldPositionX + (streetOffset + intersectionOffset) * 2, WorldPositionZ);
-            }
-        }
-        if (levelArray[row + 1, column] != null) // check if down branch is used
-        {
-            Instantiate(streetPrefab, new Vector3(worldPositionX, 0, WorldPositionZ - (streetOffset + intersectionOffset)), Quaternion.Euler(0, 90, 0));
-            levelArray[row + 1, column] = null;
-            if (levelArray[row + 2, column] != null)
-            {
-                Instantiate(intersectionPrefab, new Vector3(worldPositionX, 0, WorldPositionZ - (streetOffset + intersectionOffset) * 2), Quaternion.Euler(0, 90, 0));
-                levelArray[row + 2, column] = null;
-                GenerateSections(row + 2, column, worldPositionX, WorldPositionZ - (streetOffset + intersectionOffset) * 2);
-            }
-        }
-        if (levelArray[row, column - 1] != null) // check if left branch is used
-        {
-            Instantiate(streetPrefab, new Vector3(worldPositionX - (streetOffset + intersectionOffset), 0, WorldPositionZ), Quaternion.Euler(0, -180, 0));
-            levelArray[row, column - 1] = null;
-            if (levelArray[row, column - 2] != null)
-            {
-                Instantiate(intersectionPrefab, new Vector3(worldPositionX - (streetOffset + intersectionOffset) * 2, 0, WorldPositionZ), Quaternion.Euler(0, -180, 0));
-                levelArray[row, column - 2] = null;
-                GenerateSections(row, column - 2, worldPositionX - (streetOffset + intersectionOffset) * 2, WorldPositionZ);
-            }
-        }
-    }
 
     private bool Randomize(int chance)
     {
@@ -252,7 +121,7 @@ public class LevelGenerator : MonoBehaviour
         if (level[row - 1, column] == null && Randomize(depthChance) && depth > 0) // check if up branch is used
         {
             level[row - 1, column] = "c";
-            if(level[row - 2, column] == null)
+            if (level[row - 2, column] == null)
             {
                 level[row - 2, column] = "+";
                 generateSideStreet(row - 2, column, depth - 1, depthChance / depthChanceReduction, depthChanceReduction);
