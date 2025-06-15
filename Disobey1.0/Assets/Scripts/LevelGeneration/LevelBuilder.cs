@@ -37,13 +37,13 @@ public class LevelBuilder : MonoBehaviour
                 break;
             }
         }
-        // instantiate start section (and intersection section) and Player
+        // instantiate start section (and intersection section)
         Instantiate(streetPrefab, new Vector3(currentWorldPositionX, 0, currentWorldPositionZ), Quaternion.identity);
         levelArray[currentRow, currentColumn] = null; // delete instantiated sections from array
+
+        Instantiate(PlayerPrefab, new Vector3(currentWorldPositionX, 0 + playerHightOffset, currentWorldPositionZ), Quaternion.identity); // instantiate Player
+
         currentWorldPositionX = currentWorldPositionX + (streetOffset + intersectionOffset);
-
-        Instantiate(PlayerPrefab, new Vector3(currentWorldPositionX, 0 + playerHightOffset, currentWorldPositionZ), Quaternion.identity);
-
         Instantiate(intersectionPrefab, new Vector3(currentWorldPositionX, 0, currentWorldPositionZ), Quaternion.identity);
         currentColumn++;
         levelArray[currentRow, currentColumn] = null;

@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
 
-    public float moveSpeed = 1;
+    public float moveSpeed = 10;
     private Vector2 inputDirectionVector;
 
     private void Start()
