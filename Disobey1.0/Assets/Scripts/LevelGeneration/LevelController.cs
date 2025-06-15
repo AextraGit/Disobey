@@ -5,6 +5,11 @@ public class LevelController : MonoBehaviour
     public ArrayLevelGenerator arrayLevelGenerator;
     public LevelBuilder levelBuilder;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         // generate basic small level

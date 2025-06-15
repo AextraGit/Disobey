@@ -12,8 +12,10 @@ public class LevelBuilder : MonoBehaviour
 {
     private string[,] levelArray;
 
+    public GameObject PlayerPrefab;
     public GameObject streetPrefab;
     public GameObject intersectionPrefab;
+    public float playerHightOffset = 1;
     public float streetOffset = 20f;
     public float intersectionOffset = 17.5f;
 
@@ -35,10 +37,13 @@ public class LevelBuilder : MonoBehaviour
                 break;
             }
         }
-        // instantiate start section (and intersection section)
+        // instantiate start section (and intersection section) and Player
         Instantiate(streetPrefab, new Vector3(currentWorldPositionX, 0, currentWorldPositionZ), Quaternion.identity);
         levelArray[currentRow, currentColumn] = null; // delete instantiated sections from array
         currentWorldPositionX = currentWorldPositionX + (streetOffset + intersectionOffset);
+
+        Instantiate(PlayerPrefab, new Vector3(currentWorldPositionX, 0 + playerHightOffset, currentWorldPositionZ), Quaternion.identity);
+
         Instantiate(intersectionPrefab, new Vector3(currentWorldPositionX, 0, currentWorldPositionZ), Quaternion.identity);
         currentColumn++;
         levelArray[currentRow, currentColumn] = null;
