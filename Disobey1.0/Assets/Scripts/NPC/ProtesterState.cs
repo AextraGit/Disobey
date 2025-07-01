@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public interface ProtesterState
 {
@@ -11,7 +12,10 @@ public interface ProtesterState
 public class WanderState : ProtesterState
 {
     private ProtesterMovement npc;
-    public WanderState(ProtesterMovement npc) { this.npc = npc; }
+    public WanderState(ProtesterMovement npc)
+    { 
+        this.npc = npc; 
+    }
 
     private Vector3 startLocation;
     private Vector3 wanderLocation;
@@ -59,41 +63,69 @@ public class WanderState : ProtesterState
 public class SeekState : ProtesterState
 {
     private ProtesterMovement npc;
-    public SeekState(ProtesterMovement npc) { this.npc = npc; }
+    private Transform player;
+    public SeekState(ProtesterMovement npc) 
+    { 
+        this.npc = npc;
+        player = GameObject.FindWithTag("Player").transform;
+    }
 
     public void Enter()
     {
-
+        npc.agent.speed = 3.5f;
     }
 
     public void Update()
     {
-
+        npc.agent.SetDestination(player.position);
     }
 
     public void Exit()
     {
-
+        npc.agent.speed = 3.5f;
     }
 }
 
 public class HuntState : ProtesterState
 {
     private ProtesterMovement npc;
-    public HuntState(ProtesterMovement npc) { this.npc = npc; }
+    private Transform player;
+    public HuntState(ProtesterMovement npc)
+    { 
+        this.npc = npc;
+        player = GameObject.FindWithTag("Player").transform;
+    }
+
+    public GameObject target;
 
     public void Enter()
     {
+        npc.agent.speed = 2f;
 
+        GameObject closestEnemy = null;
+        float minDistance = float.MaxValue;
+        Vector3 playerPos = player.position;
+
+        foreach (GameObject enemy in npc.enemysNearby)
+        {
+            float dist = Vector3.Distance(playerPos, enemy.transform.position);
+            if (dist < minDistance)
+            {
+                minDistance = dist;
+                closestEnemy = enemy;
+            }
+        }
+
+        target = closestEnemy;
     }
 
     public void Update()
     {
-
+        npc.agent.SetDestination(target.transform.position);
     }
 
     public void Exit()
     {
-
+        npc.agent.speed = 3.5f;
     }
 }

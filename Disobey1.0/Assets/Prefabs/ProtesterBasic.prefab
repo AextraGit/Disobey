@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 837649102411409692}
   - component: {fileID: -7565769300316993719}
   - component: {fileID: -6531592334269638551}
+  - component: {fileID: 5541895678523246438}
   m_Layer: 0
   m_Name: ProtesterBasic
-  m_TagString: Untagged
+  m_TagString: Protester
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,6 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b945d674d47354a8d1e1b15cb0ca94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!195 &-6531592334269638551
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -96,6 +99,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &5541895678523246438
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5008053681795494598}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6863267960051801066
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +136,7 @@ GameObject:
   - component: {fileID: 8624315988242185712}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Protester
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
