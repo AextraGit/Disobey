@@ -55,7 +55,7 @@ public class ProtesterWanderState : ProtesterState
 
     public void Exit()
     {
-        npc.agent.speed = 3.5f;
+
     }
 }
 
@@ -71,7 +71,7 @@ public class ProtesterSeekState : ProtesterState
 
     public void Enter()
     {
-        npc.agent.speed = 3.5f;
+        npc.agent.speed = 2.5f;
     }
 
     public void Update()
@@ -93,7 +93,7 @@ public class ProtesterHuntState : ProtesterState
     public ProtesterHuntState(ProtesterMovement npc)
     { 
         this.npc = npc;
-        player = GameObject.FindWithTag("Player").transform;
+        player = npc.player.transform;
     }
 
     public GameObject target;
@@ -104,11 +104,11 @@ public class ProtesterHuntState : ProtesterState
 
         GameObject closestEnemy = null;
         float minDistance = float.MaxValue;
-        Vector3 playerPos = player.position;
+        Vector3 npcPos = npc.transform.position;
 
         foreach (GameObject enemy in npc.policeNearby)
         {
-            float dist = Vector3.Distance(playerPos, enemy.transform.position);
+            float dist = Vector3.Distance(npcPos, enemy.transform.position);
             if (dist < minDistance)
             {
                 minDistance = dist;

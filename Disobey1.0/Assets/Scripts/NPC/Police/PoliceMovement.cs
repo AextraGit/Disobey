@@ -28,13 +28,16 @@ public class PoliceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPlayerNearby || (protestersNearby.Count > 0 && protestersNearby.Count < policeNearby.Count))
+        int enemyCount = protestersNearby.Count;
+        if (isPlayerNearby) enemyCount++;
+
+        if ((enemyCount > 0 && enemyCount <= policeNearby.Count + 1))
         {
             if (!(currentState is PoliceHuntState))
             {
                 ChangeState(new PoliceHuntState(this));
             }
-        } else if (protestersNearby.Count >= policeNearby.Count)
+        } else if (enemyCount > 0 && enemyCount > policeNearby.Count + 1)
         {
             if (!(currentState is PoliceFleeState))
             { 
