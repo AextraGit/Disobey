@@ -7,20 +7,21 @@ using UnityEngine.XR;
 public class ProtesterMovement : MonoBehaviour
 {
     private Rigidbody rb;
-    public Transform player;
+    public GameObject player;
     public NavMeshAgent agent;
     private bool isPlayerNearby;
-    private int numberOfEnemysNearby;
-    public List<GameObject> enemysNearby = new List<GameObject>();
-
+    private int numberOfPoliceNearby = 0;
+    public List<GameObject> policeNearby = new List<GameObject>();
     private ProtesterState currentState;
+
     private void Start()
     {
+        player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         rb.constraints = RigidbodyConstraints.FreezeRotation; // rotation turned off
 
-        ChangeState(new WanderState(this));
+        ChangeState(new ProtesterWanderState(this));
     }
 
     void Update()
@@ -30,44 +31,52 @@ public class ProtesterMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger)
+        {
+            return;
+        }
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = true;
         }
         if (other.CompareTag("Police"))
         {
-            numberOfEnemysNearby++;
-            enemysNearby.Add(other.gameObject);
-            if (numberOfEnemysNearby == 1)
+            numberOfPoliceNearby++;
+            policeNearby.Add(other.gameObject);
+            if (numberOfPoliceNearby > 0 && !(currentState is ProtesterHuntState))
             {
-                ChangeState(new HuntState(this));
+                ChangeState(new ProtesterHuntState(this));
             }
         }
     }
     private void OnTriggerExit(Collider other)
     {
+        if (other.isTrigger)
+        {
+            return;
+        }
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
         }
         if (other.CompareTag("Police"))
         {
-            numberOfEnemysNearby--;
-            enemysNearby.Remove(other.gameObject);
-            if (numberOfEnemysNearby == 0)
+            numberOfPoliceNearby--;
+            policeNearby.Remove(other.gameObject);
+            if (numberOfPoliceNearby == 0)
             {
-                ChangeState(new WanderState(this));
+                ChangeState(new ProtesterWanderState(this));
             } else
             {
-                ChangeState(new HuntState(this));
+                ChangeState(new ProtesterHuntState(this));
             }
         }
     }
     public void Call()
     {
-        if (isPlayerNearby)
+        if (isPlayerNearby && !(currentState is ProtesterSeekState))
         {
-            ChangeState(new SeekState(this));
+            ChangeState(new ProtesterSeekState(this));
         }
     }
 

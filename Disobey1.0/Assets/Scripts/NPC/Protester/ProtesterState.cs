@@ -9,10 +9,10 @@ public interface ProtesterState
     void Exit();
 }
 
-public class WanderState : ProtesterState
+public class ProtesterWanderState : ProtesterState
 {
     private ProtesterMovement npc;
-    public WanderState(ProtesterMovement npc)
+    public ProtesterWanderState(ProtesterMovement npc)
     { 
         this.npc = npc; 
     }
@@ -41,7 +41,6 @@ public class WanderState : ProtesterState
         Vector3 potentialLocation = startLocation + randomOffset;
 
         NavMeshHit hit;
-        // Suche innerhalb von 2 Einheiten um den Punkt nach einer gültigen NavMesh-Position
         if (NavMesh.SamplePosition(potentialLocation, out hit, 2.0f, NavMesh.AllAreas))
         {
             wanderLocation = hit.position;
@@ -60,14 +59,14 @@ public class WanderState : ProtesterState
     }
 }
 
-public class SeekState : ProtesterState
+public class ProtesterSeekState : ProtesterState
 {
     private ProtesterMovement npc;
     private Transform player;
-    public SeekState(ProtesterMovement npc) 
+    public ProtesterSeekState(ProtesterMovement npc) 
     { 
         this.npc = npc;
-        player = GameObject.FindWithTag("Player").transform;
+        player = npc.player.transform;
     }
 
     public void Enter()
@@ -77,7 +76,8 @@ public class SeekState : ProtesterState
 
     public void Update()
     {
-        npc.agent.SetDestination(player.position);
+        Vector3 directionToNPC = (npc.transform.position - player.transform.position).normalized;
+        npc.agent.SetDestination(player.position + directionToNPC * 5f);
     }
 
     public void Exit()
@@ -86,11 +86,11 @@ public class SeekState : ProtesterState
     }
 }
 
-public class HuntState : ProtesterState
+public class ProtesterHuntState : ProtesterState
 {
     private ProtesterMovement npc;
     private Transform player;
-    public HuntState(ProtesterMovement npc)
+    public ProtesterHuntState(ProtesterMovement npc)
     { 
         this.npc = npc;
         player = GameObject.FindWithTag("Player").transform;
@@ -106,7 +106,7 @@ public class HuntState : ProtesterState
         float minDistance = float.MaxValue;
         Vector3 playerPos = player.position;
 
-        foreach (GameObject enemy in npc.enemysNearby)
+        foreach (GameObject enemy in npc.policeNearby)
         {
             float dist = Vector3.Distance(playerPos, enemy.transform.position);
             if (dist < minDistance)
@@ -121,7 +121,10 @@ public class HuntState : ProtesterState
 
     public void Update()
     {
-        npc.agent.SetDestination(target.transform.position);
+        if (Vector3.Distance(target.transform.position, npc.transform.position) >= 1.0f)
+        {
+            npc.agent.SetDestination(target.transform.position);
+        }
     }
 
     public void Exit()
