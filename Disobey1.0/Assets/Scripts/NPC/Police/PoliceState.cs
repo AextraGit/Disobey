@@ -107,7 +107,7 @@ public class PoliceFleeState : PoliceState
 
     public void Enter()
     {
-        npc.agent.speed = 3.5f;
+        npc.agent.speed = 2.5f;
     }
 
     public void Update()
@@ -202,7 +202,7 @@ public class PoliceHuntState : PoliceState
 
     public void Enter()
     {
-        npc.agent.speed = 3.5f;
+        npc.agent.speed = 2f;
     }
 
     public void Update()
