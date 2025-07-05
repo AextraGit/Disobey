@@ -16,8 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX; // rotation in Z and X axis turned off to prevent the player from falling over
-        rb.constraints = RigidbodyConstraints.FreezeRotation; // rotation turned off to prevent the player from falling over
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation; // rotation turned off to prevent the player from falling over and Y-Movement turned off
     }
 
     private void FixedUpdate()

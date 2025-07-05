@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Brick
   - DynamicBox
+  - NPC
+  - Police
+  - Protester
   layers:
   - Default
   - TransparentFX

@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 3730899349991234251}
   - component: {fileID: 4565518446043172856}
   - component: {fileID: 7111066631055047472}
+  - component: {fileID: -1306200637257245559}
+  - component: {fileID: 4426414976265244306}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +133,34 @@ MonoBehaviour:
   sensitivity: 30
   cameraTransform: {fileID: 6186231474708660756}
   playerTransform: {fileID: 8290433385996918423}
+--- !u!114 &-1306200637257245559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317049088160753127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e72362ddf49f048953555d5eee6b6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!208 &4426414976265244306
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317049088160753127}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2794101393686226182
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +175,7 @@ GameObject:
   - component: {fileID: 1716373128790235398}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
