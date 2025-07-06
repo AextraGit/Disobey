@@ -6,11 +6,13 @@ using UnityEngine.InputSystem;
 public class ThrowStone : MonoBehaviour
 {
     public GameObject brickPrefab; // Prefab for the brick to be thrown
-    public float throwForce = 500f; // Force applied to the brick when thrown
+    public float throwForce = 700f; // Force applied to the brick when thrown
     public Feedback feedback; // Reference to the Feedback script to update the count
-    public int maxCount = 10;
+    public int maxCount = 1000;
     public float cooldownTime = 10f; // Cooldown time in seconds
     public Camera mainCamera;
+    public float leftRotationAdjustment = -0.1f; // Adjustment for left rotation of the throw direction
+    public float upRotationAdjustment = 0.3f; // Adjustment for right rotation of the throw direction
 
     // public InputActionReference throwAction;
 
@@ -86,7 +88,7 @@ public class ThrowStone : MonoBehaviour
         Vector3 spawnPosition = transform.position + transform.up * 1.5f + transform.forward * 1f + transform.right * 1f;
         GameObject brick = Instantiate(brickPrefab, spawnPosition, Quaternion.Euler(UnityEngine.Random.Range(-360, 361), UnityEngine.Random.Range(-360, 361), UnityEngine.Random.Range(-360, 361)));
         Rigidbody brickRB = brick.GetComponent<Rigidbody>();
-        Vector3 throwDirection = (mainCamera.transform.forward + Vector3.up * 0.3f + Vector3.right * (-0.1f)).normalized;
+        Vector3 throwDirection = (mainCamera.transform.forward + Vector3.up * upRotationAdjustment + Vector3.right * leftRotationAdjustment).normalized;
         brickRB.AddForce(throwDirection * throwForce);
     }
 }
