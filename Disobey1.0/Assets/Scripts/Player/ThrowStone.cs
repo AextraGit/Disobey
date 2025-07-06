@@ -7,14 +7,13 @@ public class ThrowStone : MonoBehaviour
     public Transform throwPoint; // Point from where the brick will be thrown
     public float throwForce = 500f; // Force applied to the brick when thrown
     public Feedback feedback; // Reference to the Feedback script to update the count
+    public int maxCount = 10;
 
     private int count; // Counter for the number of bricks thrown
-    private int maxCount;
 
     void Start()
     {
         count = 0;
-        maxCount = 50;
         feedback.UpdateCount(count, maxCount); // Initialize the count in the Feedback script
     }
 
@@ -25,9 +24,10 @@ public class ThrowStone : MonoBehaviour
             Throw();
             count++;
             feedback.UpdateCount(count, maxCount); // Update the count in the Feedback script
-        } else
+        } else if (value.isPressed && count >= maxCount)
         {
             // make text red or something
+            StartCoroutine(feedback.UpdateMaxCountReached(count, maxCount));
         }
     }
 

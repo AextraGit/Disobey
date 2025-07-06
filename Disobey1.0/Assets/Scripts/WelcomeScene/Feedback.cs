@@ -9,6 +9,7 @@ public class Feedback : MonoBehaviour
     public TextMeshProUGUI countText;
     public float displayTimeWelcome = 5f;
     public float displayTimeMessages = 3f;
+    public float displayMaxCountReached = 4f;
 
     public InputActionReference doContinue;
 
@@ -86,6 +87,15 @@ public class Feedback : MonoBehaviour
 
     public void UpdateCount(int count, int max)
     {
-        countText.text = "Bricks thrown: " + count.ToString() + "/50";
+        countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
+    }
+
+    public IEnumerator UpdateMaxCountReached(int count, int max)
+    {
+        countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
+        countText.color = Color.red; // Change text color to red
+        yield return new WaitForSeconds(displayMaxCountReached);
+        countText.color = Color.white; // Change text color back to white
+        doContinue.action.Disable(); // Disable the continue action
     }
 }
