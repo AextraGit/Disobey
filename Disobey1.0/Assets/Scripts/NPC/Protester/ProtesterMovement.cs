@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.XR;
 
 public class ProtesterMovement : MonoBehaviour
 {
@@ -26,6 +25,19 @@ public class ProtesterMovement : MonoBehaviour
 
     void Update()
     {
+        if (numberOfPoliceNearby > 0)
+        {
+            if (!(currentState is ProtesterHuntState))
+            {
+                ChangeState(new ProtesterHuntState(this));
+            }
+        } else if (numberOfPoliceNearby == 0)
+        {
+            if (!(currentState is ProtesterWanderState) && !(currentState is ProtesterSeekState))
+            {
+                ChangeState(new ProtesterWanderState(this));
+            }
+        }
         currentState?.Update();
     }
 
@@ -43,10 +55,6 @@ public class ProtesterMovement : MonoBehaviour
         {
             numberOfPoliceNearby++;
             policeNearby.Add(other.gameObject);
-            if (numberOfPoliceNearby > 0 && !(currentState is ProtesterHuntState))
-            {
-                ChangeState(new ProtesterHuntState(this));
-            }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -63,13 +71,6 @@ public class ProtesterMovement : MonoBehaviour
         {
             numberOfPoliceNearby--;
             policeNearby.Remove(other.gameObject);
-            if (numberOfPoliceNearby == 0)
-            {
-                ChangeState(new ProtesterWanderState(this));
-            } else
-            {
-                ChangeState(new ProtesterHuntState(this));
-            }
         }
     }
     public void Call()

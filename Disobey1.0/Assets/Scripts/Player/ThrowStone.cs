@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class ThrowStone : MonoBehaviour
 {
     public GameObject brickPrefab; // Prefab for the brick to be thrown
-    public Transform throwPoint; // Point from where the brick will be thrown
     public float throwForce = 500f; // Force applied to the brick when thrown
     public Feedback feedback; // Reference to the Feedback script to update the count
     public int maxCount = 10;
@@ -82,8 +81,10 @@ public class ThrowStone : MonoBehaviour
 
     void Throw()
     {
-        GameObject brick = Instantiate(brickPrefab, throwPoint.position, throwPoint.rotation);
+        Vector3 spawnPosition = transform.position + transform.up * 1f + transform.right * 0.5f;
+        GameObject brick = Instantiate(brickPrefab, spawnPosition, Quaternion.identity);
         Rigidbody brickRB = brick.GetComponent<Rigidbody>();
-        brickRB.AddForce(throwPoint.forward * throwForce);
+        Vector3 throwDirection = (transform.forward + Vector3.up * 0.5f).normalized;
+        brickRB.AddForce(throwDirection * throwForce);
     }
 }
