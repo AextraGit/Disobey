@@ -22,6 +22,7 @@ public class AnimationWelcomeText : MonoBehaviour
         {
             return; // Skip the wobble effect if stopWobble is true
         }
+
         textMesh.ForceMeshUpdate();
         mesh = textMesh.mesh;
         vertices = mesh.vertices;

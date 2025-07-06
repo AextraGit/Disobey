@@ -1025,11 +1025,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8507998686897627830, guid: cb35fdc8c438ba849be2f0e62a9c9255, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6.21
       objectReference: {fileID: 0}
     - target: {fileID: 8507998686897627830, guid: cb35fdc8c438ba849be2f0e62a9c9255, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.65
+      value: -0.63
       objectReference: {fileID: 0}
     - target: {fileID: 8507998686897627830, guid: cb35fdc8c438ba849be2f0e62a9c9255, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1091,7 +1091,6 @@ MonoBehaviour:
   feedback: {fileID: 1928994052}
   maxCount: 50
   cooldownTime: 2
-  throwAction: {fileID: -1926122320057715734, guid: bc01412ccef00954a879d9e2f447ead9, type: 3}
 --- !u!4 &1452725684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4172501061558958266, guid: 3edd1a40de856064d84b5077d5d19931, type: 3}
@@ -1743,6 +1742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d42f04aed0d194c8b9500b8b64c4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationWelcomeText: {fileID: 2125606766}
   welcomeText: {fileID: 2125606761}
   countText: {fileID: 1747644511}
   displayTimeWelcome: 5
@@ -1933,6 +1933,7 @@ GameObject:
   - component: {fileID: 2125606764}
   - component: {fileID: 2125606763}
   - component: {fileID: 2125606765}
+  - component: {fileID: 2125606766}
   m_Layer: 5
   m_Name: Welcome Text
   m_TagString: Untagged
@@ -1979,8 +1980,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Use W, A, S, D to move to the front, left, back and left. Press Space to
-    continue.
+  m_text: Use W, A, S, D to move to the front, left, back and right. Press Space
+    to continue.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2067,7 +2068,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125606761}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 87d1b0b6a846c7449840303bb740a0d7, type: 2}
   m_CullingMode: 0
@@ -2081,6 +2082,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2125606766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125606761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae21c24ec9ca1444097247bb8058e4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2136304406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2182,7 +2195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8507998686897627830, guid: cb35fdc8c438ba849be2f0e62a9c9255, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 8507998686897627830, guid: cb35fdc8c438ba849be2f0e62a9c9255, type: 3}
       propertyPath: m_LocalPosition.z

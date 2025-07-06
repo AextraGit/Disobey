@@ -26,11 +26,11 @@ public class PoliceHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            DestroyBox();
+            DestroyPolice();
         }
     }
 
-    private void DestroyBox()
+    private void DestroyPolice()
     {
         Debug.Log("Police destroyed!");
         Destroy(gameObject);

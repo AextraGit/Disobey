@@ -24,35 +24,35 @@ public class ThrowStone : MonoBehaviour
     }
 
     /*
-void OnEnable()
-{
-    throwAction.action.started += ThrowAction;
-    throwAction.action.Enable(); // Ensure the action is enabled
-}
+    void OnEnable()
+    {
+        throwAction.action.started += ThrowAction;
+        throwAction.action.Enable(); // Ensure the action is enabled
+    }
 
-void OnDisable()
-{
-    throwAction.action.started -= ThrowAction;
-    throwAction.action.Disable(); // Disable the action when not in use
-}
+    void OnDisable()
+    {
+        throwAction.action.started -= ThrowAction;
+        throwAction.action.Disable(); // Disable the action when not in use
+    }
 
 
-private void ThrowAction(InputAction.CallbackContext obj)
-{
-if (obj.performed && count < maxCount)
-{
-Throw();
-count++;
-bricksLeft--;
-feedback.UpdateCount(count, bricksLeft, maxCount); // Update the count in the Feedback script
-StartCoroutine(CoolDown()); // Start cooldown after throwing a brick
-} 
-else if (obj.performed && count >= maxCount)
-{
-StartCoroutine(feedback.UpdateMaxCountReached(count, bricksLeft, maxCount));
-}
+    private void ThrowAction(InputAction.CallbackContext obj)
+    {
+        if (obj.performed && count < maxCount)
+        {
+            Throw();
+            count++;
+            bricksLeft--;
+            feedback.UpdateCount(count, bricksLeft, maxCount); // Update the count in the Feedback script
+            StartCoroutine(CoolDown()); // Start cooldown after throwing a brick
+        } 
+        else if (obj.performed && count >= maxCount)
+        {
+            StartCoroutine(feedback.UpdateMaxCountReached(count, bricksLeft, maxCount));
+        }
 
-}
+    }
 
     IEnumerator CoolDown()
     {

@@ -100,6 +100,5 @@ public class Feedback : MonoBehaviour
         countText.color = Color.red; // Change text color to red
         yield return new WaitForSeconds(displayMaxCountReached);
         countText.color = Color.white; // Change text color back to white
-        doContinue.action.Disable(); // Disable the continue action
     }
 }
