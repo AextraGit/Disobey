@@ -138,6 +138,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countText: {fileID: 1767452633}
   displayMaxCountReached: 4
+--- !u!114 &11726552 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5809354516773090732, guid: 85bf408173e632f49b51dbaf2113df76, type: 3}
+  m_PrefabInstance: {fileID: 206716314}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11726545}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d42f04aed0d194c8b9500b8b64c4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &65897047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -650,6 +661,18 @@ PrefabInstance:
     - target: {fileID: 7111066631055047472, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
       propertyPath: sensitivity
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7638098149989538880, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
+      propertyPath: feedback
+      value: 
+      objectReference: {fileID: 11726552}
+    - target: {fileID: 7638098149989538880, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
+      propertyPath: maxCount
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7638098149989538880, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
+      propertyPath: throwForce
+      value: 700
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
