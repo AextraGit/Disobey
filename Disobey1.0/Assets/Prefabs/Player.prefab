@@ -180,6 +180,7 @@ MonoBehaviour:
   feedback: {fileID: 0}
   maxCount: 10
   cooldownTime: 10
+  mainCamera: {fileID: 3764470815092522521}
 --- !u!114 &4345788941564970962
 MonoBehaviour:
   m_ObjectHideFlags: 0
