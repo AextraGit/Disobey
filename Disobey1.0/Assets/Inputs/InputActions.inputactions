@@ -36,9 +36,6 @@
                     "name": "Continue",
                     "type": "Button",
                     "id": "4cc8c4d5-53a2-4669-a3dc-61a75588ba16",
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "17f589a7-891e-40a0-8309-7c5045c742db",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -115,7 +112,7 @@
                 {
                     "name": "",
                     "id": "487bcef8-2fa2-40d8-8b94-145ec8ae1f59",
-                    "path": "<Keyboard>/q",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -131,12 +128,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Continue",
-                    "id": "c1bcb3ea-606c-41a8-92b5-0ef8c991b283",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
