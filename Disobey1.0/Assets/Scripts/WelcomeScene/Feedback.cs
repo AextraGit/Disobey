@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Feedback : MonoBehaviour
 {
+    public AnimationWelcomeText animationWelcomeText;
     public GameObject welcomeText;
     public TextMeshProUGUI countText;
     public float displayTimeWelcome = 5f;
@@ -72,6 +73,7 @@ public class Feedback : MonoBehaviour
         }
         else
         {
+            animationWelcomeText.StopWobble(); // Stop the wobble effect
             welcomeText.GetComponent<TextMeshProUGUI>().text = "";
         }
     }
