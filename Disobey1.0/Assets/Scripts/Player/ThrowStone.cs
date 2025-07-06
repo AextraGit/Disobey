@@ -83,13 +83,10 @@ public class ThrowStone : MonoBehaviour
 
     void Throw()
     {
-        for (int i = 0; i < 1; i++)
-        {
-        Vector3 spawnPosition = transform.position + transform.up * 1.5f + transform.forward * 1f + transform.right * (0.5f + 0.01f * i);
+        Vector3 spawnPosition = transform.position + transform.up * 1.5f + transform.forward * 1f + transform.right * 1f;
         GameObject brick = Instantiate(brickPrefab, spawnPosition, Quaternion.Euler(UnityEngine.Random.Range(-360, 361), UnityEngine.Random.Range(-360, 361), UnityEngine.Random.Range(-360, 361)));
         Rigidbody brickRB = brick.GetComponent<Rigidbody>();
-        Vector3 throwDirection = (mainCamera.transform.forward + Vector3.up * 0.1f).normalized;
+        Vector3 throwDirection = (mainCamera.transform.forward + Vector3.up * 0.3f + Vector3.right * (-0.1f)).normalized;
         brickRB.AddForce(throwDirection * throwForce);
-        }
     }
 }
