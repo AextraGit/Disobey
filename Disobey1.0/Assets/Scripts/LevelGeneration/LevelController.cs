@@ -16,6 +16,8 @@ public class LevelController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            if (Application.isPlaying)
+
             DontDestroyOnLoad(gameObject);
         }
         else
