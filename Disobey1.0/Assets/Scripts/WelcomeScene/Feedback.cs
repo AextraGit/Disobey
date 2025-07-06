@@ -84,8 +84,8 @@ public class Feedback : MonoBehaviour
         doContinue.action.Enable();
     }
 
-    public void UpdateCount(int count)
+    public void UpdateCount(int count, int max)
     {
-        countText.text = "Bricks thrown: " + count.ToString();
+        countText.text = "Bricks thrown: " + count.ToString() + "/50";
     }
 }

@@ -9,20 +9,25 @@ public class ThrowStone : MonoBehaviour
     public Feedback feedback; // Reference to the Feedback script to update the count
 
     private int count; // Counter for the number of bricks thrown
+    private int maxCount;
 
     void Start()
     {
         count = 0;
-        feedback.UpdateCount(count); // Initialize the count in the Feedback script
+        maxCount = 50;
+        feedback.UpdateCount(count, maxCount); // Initialize the count in the Feedback script
     }
 
     public void OnThrow(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && count < maxCount)
         {
             Throw();
             count++;
-            feedback.UpdateCount(count); // Update the count in the Feedback script
+            feedback.UpdateCount(count, maxCount); // Update the count in the Feedback script
+        } else
+        {
+            // make text red or something
         }
     }
 
