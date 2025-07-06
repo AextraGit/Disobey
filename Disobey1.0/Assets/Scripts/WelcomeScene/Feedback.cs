@@ -85,14 +85,16 @@ public class Feedback : MonoBehaviour
         doContinue.action.Enable();
     }
 
-    public void UpdateCount(int count, int max)
+    public void UpdateCount(int count, int bricksLeft, int max)
     {
-        countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
+        countText.text = "Bricks left: " + bricksLeft.ToString();
+        // countText.text = "Bricks left: " + bricksLeft.ToString() + " | Bricks thrown: " + count.ToString() + "/" + max.ToString();
+        // countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
     }
 
-    public IEnumerator UpdateMaxCountReached(int count, int max)
+    public IEnumerator UpdateMaxCountReached(int count, int bricksLeft, int max)
     {
-        countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
+        // countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
         countText.color = Color.red; // Change text color to red
         yield return new WaitForSeconds(displayMaxCountReached);
         countText.color = Color.white; // Change text color back to white

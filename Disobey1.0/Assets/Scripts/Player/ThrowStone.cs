@@ -10,11 +10,13 @@ public class ThrowStone : MonoBehaviour
     public int maxCount = 10;
 
     private int count; // Counter for the number of bricks thrown
+    private int bricksLeft; // Counter for the number of bricks left
 
     void Start()
     {
         count = 0;
-        feedback.UpdateCount(count, maxCount); // Initialize the count in the Feedback script
+        bricksLeft = maxCount; // Initialize the number of bricks left
+        feedback.UpdateCount(count, bricksLeft, maxCount); // Initialize the count in the Feedback script
     }
 
     public void OnThrow(InputValue value)
@@ -23,11 +25,12 @@ public class ThrowStone : MonoBehaviour
         {
             Throw();
             count++;
-            feedback.UpdateCount(count, maxCount); // Update the count in the Feedback script
+            bricksLeft--;
+            feedback.UpdateCount(count, bricksLeft, maxCount); // Update the count in the Feedback script
         } else if (value.isPressed && count >= maxCount)
         {
             // make text red or something
-            StartCoroutine(feedback.UpdateMaxCountReached(count, maxCount));
+            StartCoroutine(feedback.UpdateMaxCountReached(count, bricksLeft, maxCount));
         }
     }
 
