@@ -2115,6 +2115,10 @@ PrefabInstance:
       propertyPath: maxCount
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 7638098149989538880, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
+      propertyPath: throwForce
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 8290433385996918423, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.6
