@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -81,10 +82,13 @@ public class ThrowStone : MonoBehaviour
 
     void Throw()
     {
-        Vector3 spawnPosition = transform.position + transform.up * 1f + transform.right * 0.5f;
-        GameObject brick = Instantiate(brickPrefab, spawnPosition, Quaternion.identity);
+        for (int i = 0; i < 1; i++)
+        {
+        Vector3 spawnPosition = transform.position + transform.up * 1.5f + transform.forward * 1f + transform.right * (0.5f + 0.01f * i);
+        GameObject brick = Instantiate(brickPrefab, spawnPosition, Quaternion.Euler(UnityEngine.Random.Range(-360, 361), UnityEngine.Random.Range(-360, 361), UnityEngine.Random.Range(-360, 361)));
         Rigidbody brickRB = brick.GetComponent<Rigidbody>();
         Vector3 throwDirection = (transform.forward + Vector3.up * 0.5f).normalized;
         brickRB.AddForce(throwDirection * throwForce);
+        }
     }
 }
