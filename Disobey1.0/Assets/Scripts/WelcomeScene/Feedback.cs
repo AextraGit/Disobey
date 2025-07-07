@@ -5,19 +5,23 @@ using UnityEngine.InputSystem;
 
 public class Feedback : MonoBehaviour
 {
-    public AnimationWelcomeText animationWelcomeText;
     public GameObject welcomeText;
+    public AnimationWelcomeText animationWelcomeText;
+
     public TextMeshProUGUI countText;
+    
     public float displayTimeWelcome = 5f;
     public float displayTimeMessages = 3f;
     public float displayMaxCountReached = 4f;
-    public ThrowMolli throwMolli; // Reference to the ThrowMolli script
-    public ThrowStone throwStone; // Reference to the ThrowStone script
+    
+    public ThrowMolli throwMolli;
+    public ThrowStone throwStone;
 
     public InputActionReference doContinue;
 
     private string[] tutorialSteps;
     private int currentStep;
+
     private string welcomeMessage = "Welcome to Disobey!";
     private string continueButtonText = "Space";
     private string throwBrickButtonText = "left mouse button";
@@ -43,8 +47,8 @@ public class Feedback : MonoBehaviour
     {
         welcomeText.GetComponent<TextMeshProUGUI>().text = tutorialSteps[currentStep];
         yield return new WaitForSeconds(displayTimeWelcome);
-        currentStep++; // Move to the next step after displaying the first one
-        ShowTutorialStep(); // Show the next step immediately
+        currentStep++;
+        ShowTutorialStep();
     }
 
     void ShowTutorialStep()
@@ -52,22 +56,20 @@ public class Feedback : MonoBehaviour
         if (currentStep < tutorialSteps.Length)
         {
             welcomeText.GetComponent<TextMeshProUGUI>().text = tutorialSteps[currentStep];
-            currentStep++; // Increment the step after showing the text
+            currentStep++;
             StartCoroutine(WaitForInput());
         }
         else
         {
-            animationWelcomeText.StopWobble(); // Stop the wobble effect
+            animationWelcomeText.StopWobble();
             welcomeText.GetComponent<TextMeshProUGUI>().text = "";
         }
     }
 
     IEnumerator WaitForInput()
     {
-        // Disable input while waiting for the display time
         doContinue.action.Disable();
         yield return new WaitForSeconds(displayTimeMessages);
-        // Re-enable input after the display time
         doContinue.action.Enable();
     }
 
@@ -82,26 +84,25 @@ public class Feedback : MonoBehaviour
     public IEnumerator UpdateMaxCountReached(int count, int bricksLeft, int max)
     {
         // countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
-        countText.color = Color.red; // Change text color to red
+        countText.color = Color.red;
         yield return new WaitForSeconds(displayMaxCountReached);
-        countText.color = Color.white; // Change text color back to white
+        countText.color = Color.white;
     }
 
     void OnEnable()
     {
         doContinue.action.started += DoContinue;
-        doContinue.action.Enable(); // Ensure the action is enabled
+        doContinue.action.Enable();
     }
 
     void OnDisable()
     {
         doContinue.action.started -= DoContinue;
-        doContinue.action.Disable(); // Disable the action when not in use
+        doContinue.action.Disable();
     }
 
     private void DoContinue(InputAction.CallbackContext obj)
     {
-        // Only proceed if the current step is valid and the text has been displayed long enough
         ShowTutorialStep();
     }
 }

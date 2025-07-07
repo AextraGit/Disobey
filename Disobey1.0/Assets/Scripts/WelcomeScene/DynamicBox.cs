@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DynamicBox : MonoBehaviour
 {
-    public float health = 50f; // Initial health of the box
+    public float health = 50f;
 
     private void Start()
     {
@@ -14,13 +14,13 @@ public class DynamicBox : MonoBehaviour
         if (collision.gameObject.CompareTag("Brick"))
         {
             float damage = collision.gameObject.GetComponent<Brick>().damage;
-            Debug.Log($"Collision detected with Cube! Damage: {damage}");
+            Debug.Log($"Collision detected with Box! Damage: {damage}");
             TakeDamage(damage);
         }
         if (collision.gameObject.CompareTag("Molli"))
         {
             float damage = collision.gameObject.GetComponent<Bottle>().damage;
-            Debug.Log($"Collision detected with Cube! Damage: {damage}");
+            Debug.Log($"Collision detected with Box! Damage: {damage}");
             TakeDamage(damage);
         }
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PoliceHealth : MonoBehaviour
 {
-    public float health = 50f; // Initial health of the police
+    public float health = 50f;
 
     private void Start()
     {
@@ -14,12 +14,12 @@ public class PoliceHealth : MonoBehaviour
         if (collision.gameObject.CompareTag("Brick"))
         {
             float damage = collision.gameObject.GetComponent<Brick>().damage;
-            Debug.Log($"Collision detected with Cube! Damage: {damage}");
+            Debug.Log($"Collision detected with Brick! Damage: {damage}");
             TakeDamage(damage);
         }
         if (collision.gameObject.CompareTag("Molli")) {
             float damage = collision.gameObject.GetComponent<Bottle>().damage;
-            Debug.Log($"Collision detected with Cube! Damage: {damage}");
+            Debug.Log($"Collision detected with Molli! Damage: {damage}");
             TakeDamage(damage);
         }
     }

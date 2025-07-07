@@ -5,25 +5,27 @@ using UnityEngine.InputSystem;
 
 public class ThrowStone : MonoBehaviour
 {
-    public GameObject brickPrefab; // Prefab for the brick to be thrown
-    public float throwForce = 700f; // Force applied to the brick when thrown
-    public Feedback feedback; // Reference to the Feedback script to update the count
+    public Feedback feedback;
+    public GameObject brickPrefab;
+    public float throwForce = 700f;
     public int maxCount = 1000;
-    public float cooldownTime = 10f; // Cooldown time in seconds
+    public float cooldownTime = 10f;
+    
     public Camera mainCamera;
-    public float leftRotationAdjustment = -0.1f; // Adjustment for left rotation of the throw direction
-    public float upRotationAdjustment = 0.3f; // Adjustment for right rotation of the throw direction
+    
+    public float leftRotationAdjustment = -0.1f;
+    public float upRotationAdjustment = 0.3f;
 
     // public InputActionReference throwAction;
 
-    private int count; // Counter for the number of bricks thrown
-    private int bricksLeft; // Counter for the number of bricks left
+    private int count;
+    private int bricksLeft;
 
     void Start()
     {
         count = 0;
-        bricksLeft = maxCount; // Initialize the number of bricks left
-        feedback.UpdateCount(count, bricksLeft, maxCount); // Initialize the count in the Feedback script
+        bricksLeft = maxCount;
+        feedback.UpdateCount(count, bricksLeft, maxCount);
     }
 
     public void OnThrow(InputValue value)
@@ -33,11 +35,10 @@ public class ThrowStone : MonoBehaviour
             Throw();
             count++;
             bricksLeft--;
-            feedback.UpdateCount(count, bricksLeft, maxCount); // Update the count in the Feedback script
-            // StartCoroutine(CoolDown()); // Start cooldown after throwing a brick
+            feedback.UpdateCount(count, bricksLeft, maxCount);
+            // StartCoroutine(CoolDown());
         } else if (value.isPressed && count >= maxCount)
         {
-            // make text red or something
             StartCoroutine(feedback.UpdateMaxCountReached(count, bricksLeft, maxCount));
         }
     }

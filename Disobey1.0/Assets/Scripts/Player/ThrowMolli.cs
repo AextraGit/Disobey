@@ -6,31 +6,28 @@ using Unity.VisualScripting;
 
 public class ThrowMolli : MonoBehaviour
 {
-    public GameObject bottlePrefab; // Prefab for the molli to be thrown
-    public float throwForce = 700f; // Force applied to the molli when thrown
-    public Feedback feedback; // Reference to the Feedback script to update the count
+    public GameObject bottlePrefab;
+    public float throwForce = 700f;
+    
+    public Feedback feedback;
+    
     public int maxCount = 1000;
-    public float cooldownTime = 10f; // Cooldown time in seconds
+    public float cooldownTime = 10f;
+
     public Camera mainCamera;
-    public float leftRotationAdjustment = -0.1f; // Adjustment for left rotation of the throw direction
-    public float upRotationAdjustment = 0.3f; // Adjustment for right rotation of the throw direction
+    public float leftRotationAdjustment = -0.1f;
+    public float upRotationAdjustment = 0.3f;
 
     // public InputActionReference throwAction;
 
-    private int count; // Counter for the number of bricks thrown
-    private int mollisLeft; // Counter for the number of bricks left
+    private int count;
+    private int mollisLeft;
 
     void Start()
     {
         count = 0;
-        mollisLeft = maxCount; // Initialize the number of bricks left
-        feedback.UpdateCount(count, mollisLeft, maxCount); // Initialize the count in the Feedback script
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        mollisLeft = maxCount;
+        feedback.UpdateCount(count, mollisLeft, maxCount);
     }
 
     public void OnBomb(InputValue value)
@@ -40,12 +37,11 @@ public class ThrowMolli : MonoBehaviour
             Throw();
             count++;
             mollisLeft--;
-            feedback.UpdateCount(count, mollisLeft, maxCount); // Update the count in the Feedback script
+            feedback.UpdateCount(count, mollisLeft, maxCount);
             // StartCoroutine(CoolDown()); // Start cooldown after throwing a brick
         }
         else if (value.isPressed && count >= maxCount)
         {
-            // make text red or something
             StartCoroutine(feedback.UpdateMaxCountReached(count, mollisLeft, maxCount));
         }
     }

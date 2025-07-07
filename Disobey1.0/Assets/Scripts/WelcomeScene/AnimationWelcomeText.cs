@@ -9,18 +9,16 @@ public class AnimationWelcomeText : MonoBehaviour
 
     private bool stopWobble;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (stopWobble)
         {
-            return; // Skip the wobble effect if stopWobble is true
+            return;
         }
 
         textMesh.ForceMeshUpdate();
@@ -30,7 +28,6 @@ public class AnimationWelcomeText : MonoBehaviour
         for (int i = 0; i < vertices.Length; i++)
         {
             Vector3 offset = Wobble(Time.time + i);
-
             vertices[i] = vertices[i] + offset;            
         }
 

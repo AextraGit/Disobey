@@ -131,13 +131,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11726545}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c8b088ab67b91c4c8d16c002bbd249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   countText: {fileID: 1767452633}
   displayTimeMaxCountReached: 4
+  throwMolli: {fileID: 0}
+  throwStone: {fileID: 0}
 --- !u!114 &11726552 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5809354516773090732, guid: 85bf408173e632f49b51dbaf2113df76, type: 3}
@@ -483,7 +485,7 @@ GameObject:
   - component: {fileID: 216766558}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
