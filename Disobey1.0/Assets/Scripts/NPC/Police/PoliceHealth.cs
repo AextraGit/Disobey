@@ -7,7 +7,6 @@ public class PoliceHealth : MonoBehaviour
     private void Start()
     {
         Debug.Log("Police Man initialized with health: " + health);
-        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -19,7 +18,7 @@ public class PoliceHealth : MonoBehaviour
             TakeDamage(damage);
         }
         if (collision.gameObject.CompareTag("Molli")) {
-            float damage = collision.gameObject.GetComponent<Brick>().damage;
+            float damage = collision.gameObject.GetComponent<Bottle>().damage;
             Debug.Log($"Collision detected with Cube! Damage: {damage}");
             TakeDamage(damage);
         }
