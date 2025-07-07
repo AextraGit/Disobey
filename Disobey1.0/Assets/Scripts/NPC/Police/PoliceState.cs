@@ -52,15 +52,18 @@ public class PoliceWanderState : PoliceState
 
         foreach (GameObject police in npc.policeNearby)
         {
-            movePosition += police.transform.position;
-
-            float distance = Vector3.Distance(police.transform.position, npc.transform.position);
-            Vector3 toNeighbor = police.transform.position - npc.transform.position;
-
-            if (distance < minDistance)
+            if (police != null)
             {
-                if (distance < 0.001f) distance = 0.001f;
-                separationVector -= toNeighbor.normalized * 3 / distance;
+                movePosition += police.transform.position;
+
+                float distance = Vector3.Distance(police.transform.position, npc.transform.position);
+                Vector3 toNeighbor = police.transform.position - npc.transform.position;
+
+                if (distance < minDistance)
+                {
+                    if (distance < 0.001f) distance = 0.001f;
+                    separationVector -= toNeighbor.normalized * 3 / distance;
+                }
             }
         }
 
