@@ -28,31 +28,13 @@ public class Feedback : MonoBehaviour
             welcomeMessage,
             "Use W, A, S, D to move to the front, left, back and right. Press " + continueButtonText + " to continue.",
             "Use the mouse to look around. Press Space to continue.",
-            "Press the " + throwBrickButtonText + " to throw a brick. Try out the controls and hit the boxes or the police men. Press Space to continue.",
+            "Press the " + throwBrickButtonText + " to throw a brick and right mouse button to throw molotows. Try out the controls and hit the boxes or the police men. Press Space to continue.",
             "Throw bricks at the targets to damage them. Press Space to continue.",
             "Now you know how to play the game, have fun! Press Space to end the tutorial."
         };
 
         doContinue.action.Disable();
         StartCoroutine(ShowFirstStep());
-    }
-
-    void OnEnable()
-    {
-        doContinue.action.started += DoContinue;
-        doContinue.action.Enable(); // Ensure the action is enabled
-    }
-
-    void OnDisable()
-    {
-        doContinue.action.started -= DoContinue;
-        doContinue.action.Disable(); // Disable the action when not in use
-    }
-
-    private void DoContinue(InputAction.CallbackContext obj)
-    {
-        // Only proceed if the current step is valid and the text has been displayed long enough
-        ShowTutorialStep();
     }
 
     IEnumerator ShowFirstStep()
@@ -90,7 +72,7 @@ public class Feedback : MonoBehaviour
     public void UpdateCount(int count, int bricksLeft, int max)
     {
         // countText.text = "Bricks left: " + bricksLeft.ToString();
-        countText.text = "Bricks left: " + bricksLeft.ToString() + "\nBricks thrown: " + count.ToString() + "/" + max.ToString();
+        countText.text = "Items left: " + bricksLeft.ToString() + "\nItems thrown: " + count.ToString() + "/" + max.ToString();
         // countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
     }
 
@@ -100,5 +82,23 @@ public class Feedback : MonoBehaviour
         countText.color = Color.red; // Change text color to red
         yield return new WaitForSeconds(displayMaxCountReached);
         countText.color = Color.white; // Change text color back to white
+    }
+
+    void OnEnable()
+    {
+        doContinue.action.started += DoContinue;
+        doContinue.action.Enable(); // Ensure the action is enabled
+    }
+
+    void OnDisable()
+    {
+        doContinue.action.started -= DoContinue;
+        doContinue.action.Disable(); // Disable the action when not in use
+    }
+
+    private void DoContinue(InputAction.CallbackContext obj)
+    {
+        // Only proceed if the current step is valid and the text has been displayed long enough
+        ShowTutorialStep();
     }
 }

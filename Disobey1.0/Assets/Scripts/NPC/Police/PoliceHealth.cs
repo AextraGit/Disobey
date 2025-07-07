@@ -17,6 +17,11 @@ public class PoliceHealth : MonoBehaviour
             Debug.Log($"Collision detected with Cube! Damage: {damage}");
             TakeDamage(damage);
         }
+        if (collision.gameObject.CompareTag("Molli")) {
+            float damage = collision.gameObject.GetComponent<Bottle>().damage;
+            Debug.Log($"Collision detected with Cube! Damage: {damage}");
+            TakeDamage(damage);
+        }
     }
 
     public void TakeDamage(float damage)

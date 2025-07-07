@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -1306200637257245559}
   - component: {fileID: 4426414976265244306}
   - component: {fileID: 7638098149989538880}
+  - component: {fileID: 2389756657395009671}
   - component: {fileID: 4345788941564970962}
   m_Layer: 0
   m_Name: Player
@@ -181,6 +182,28 @@ MonoBehaviour:
   maxCount: 10
   cooldownTime: 10
   mainCamera: {fileID: 3764470815092522521}
+  leftRotationAdjustment: -0.1
+  upRotationAdjustment: 0.3
+--- !u!114 &2389756657395009671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317049088160753127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75fd63ca1cb37249b0745959d3ecd7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bottlePrefab: {fileID: 714616302960318231, guid: 2687719183a2c834daba85863bcac30f, type: 3}
+  throwForce: 700
+  feedback: {fileID: 0}
+  maxCount: 10
+  cooldownTime: 10
+  mainCamera: {fileID: 3764470815092522521}
+  leftRotationAdjustment: -0.1
+  upRotationAdjustment: 0.3
 --- !u!114 &4345788941564970962
 MonoBehaviour:
   m_ObjectHideFlags: 0

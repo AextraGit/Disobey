@@ -1628,6 +1628,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2389756657395009671, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
+      propertyPath: feedback
+      value: 
+      objectReference: {fileID: 1928994052}
+    - target: {fileID: 2389756657395009671, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
+      propertyPath: maxCount
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 3730899349991234251, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
       propertyPath: m_Mass
       value: 1

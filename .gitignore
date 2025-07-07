@@ -16,6 +16,9 @@
 *.blend1
 *.blend1.meta
 
+Disobey1.0/Assets/Blender_Models/*
+Disobey1.0/Assets/Blender_Models.meta
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
