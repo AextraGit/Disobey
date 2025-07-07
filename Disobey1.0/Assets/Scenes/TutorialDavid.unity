@@ -1656,7 +1656,7 @@ PrefabInstance:
       objectReference: {fileID: 1928994052}
     - target: {fileID: 2389756657395009671, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
       propertyPath: maxCount
-      value: 500
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3730899349991234251, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
       propertyPath: m_Mass
@@ -1720,7 +1720,7 @@ PrefabInstance:
       objectReference: {fileID: 1928994052}
     - target: {fileID: 7638098149989538880, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
       propertyPath: maxCount
-      value: 1000
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7638098149989538880, guid: 41fce572f3cbba24baa1786a4a76474e, type: 3}
       propertyPath: throwForce
