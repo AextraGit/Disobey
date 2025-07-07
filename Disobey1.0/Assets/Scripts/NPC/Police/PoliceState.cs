@@ -14,6 +14,7 @@ public interface PoliceState
 public class PoliceWanderState : PoliceState
 {
     private PoliceMovement npc;
+    public Animator animator;
 
     public PoliceWanderState(PoliceMovement npc)
     {
@@ -28,6 +29,7 @@ public class PoliceWanderState : PoliceState
         npc.agent.speed = 1f;
         startLocation = npc.transform.position;
         npc.agent.SetDestination(GetNewWanderLocation());
+        npc.animator.SetBool("IsNearEnemy", false);
     }
 
     public void Update()
@@ -111,6 +113,7 @@ public class PoliceFleeState : PoliceState
     public void Enter()
     {
         npc.agent.speed = 2.5f;
+        npc.animator.SetBool("IsNearEnemy", false);
     }
 
     public void Update()
@@ -194,6 +197,8 @@ public class PoliceHuntState : PoliceState
 {
     private PoliceMovement npc;
     private GameObject player;
+    public Animator animator;
+    private float attackCooldown = 0f;
 
     public PoliceHuntState(PoliceMovement npc)
     {
@@ -213,9 +218,12 @@ public class PoliceHuntState : PoliceState
             GameObject closestEnemy = null;
             float minDistance = float.MaxValue;
             Vector3 npcPos = npc.transform.position;
+            float attackRange = 5f;
 
-            // check if protesters nearby
-            if (npc.protestersNearby.Count > 0)
+        attackCooldown -= Time.deltaTime;
+
+        // check if protesters nearby
+        if (npc.protestersNearby.Count > 0)
             {
                 foreach (GameObject enemy in npc.protestersNearby)
                 {
@@ -231,15 +239,35 @@ public class PoliceHuntState : PoliceState
                 if (Vector3.Distance(closestEnemy.transform.position, npcPos) < Vector3.Distance(player.transform.position, npcPos))
                 {
                     npc.agent.SetDestination(CalculateFlockingVector(closestEnemy));
+                if (closestEnemy != null)
+                {
+                    float dist = Vector3.Distance(npcPos, closestEnemy.transform.position);
+                    if ( dist <= attackRange)
+                    {
+                        npc.animator.SetBool("IsNearEnemy", true);
+                        attackCooldown = 1.0f; // 1 Sekunde Cooldown
+                    }
                 }
+            }
                 else
                 {
                     npc.agent.SetDestination(CalculateFlockingVector(player));
+                    float playerDist = Vector3.Distance(npcPos, player.transform.position);
+
+                    if (playerDist <= attackRange)
+                    {
+                        npc.animator.SetBool("IsNearEnemy", true); 
+                        attackCooldown = 1.0f; // 1 Sekunde Cooldown
+                        Debug.Log("Hitting state is activated");
+                    }
                 }
             } else
             {
                 npc.agent.SetDestination(CalculateFlockingVector(player));
-        }
+                //npc.animator.SetBool("IsNearEnemy", false);
+            }
+
+
     }
 
     public void Exit()

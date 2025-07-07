@@ -1,8 +1,10 @@
+using System.IO.Pipes;
 using UnityEngine;
 
 public class PoliceHealth : MonoBehaviour
 {
     public float health = 50f;
+    public Animator animator;
 
     private void Start()
     {
@@ -18,10 +20,13 @@ public class PoliceHealth : MonoBehaviour
             TakeDamage(damage);
         }
         if (collision.gameObject.CompareTag("Molli")) {
+            animator.SetBool("IsMolotowHit", true);
+            Debug.Log(animator.GetBool("IsMolotowHit") + " is the value of IsMolliHit");
             float damage = collision.gameObject.GetComponent<Bottle>().damage;
             Debug.Log($"Collision detected with Molli! Damage: {damage}");
             TakeDamage(damage);
         }
+        //animator.SetBool("IsMolotowHit", false);
     }
 
     public void TakeDamage(float damage)

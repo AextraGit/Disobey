@@ -13,6 +13,7 @@ public class PoliceMovement : MonoBehaviour
     public List<GameObject> policeNearby = new List<GameObject>();
     public List<GameObject> protestersNearby = new List<GameObject>();
     private PoliceState currentState;
+    public Animator animator;
 
 
     private void Start()
