@@ -184,11 +184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a0585553622e8d4ab9720bbfa09a130, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.201
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a0585553622e8d4ab9720bbfa09a130, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.478
+      value: -1.11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a0585553622e8d4ab9720bbfa09a130, type: 3}
       propertyPath: m_LocalPosition.z
@@ -239,7 +239,7 @@ PrefabInstance:
       addedObject: {fileID: 5200926414491580256}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4a0585553622e8d4ab9720bbfa09a130, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4191461804694408775}
+      addedObject: {fileID: 4800986783546747265}
   m_SourcePrefab: {fileID: 100100000, guid: 4a0585553622e8d4ab9720bbfa09a130, type: 3}
 --- !u!4 &2348227603717940448 stripped
 Transform:
@@ -273,7 +273,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!136 &4191461804694408775
+--- !u!136 &4800986783546747265
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,6 +293,6 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 3
+  m_Height: 3.2515645
   m_Direction: 1
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Center: {x: 0, y: 2.491759, z: 0}
