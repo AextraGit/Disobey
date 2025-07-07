@@ -33,7 +33,7 @@ public class ThrowMolli : MonoBehaviour
         
     }
 
-    public void OnThrow(InputValue value)
+    public void OnBomb(InputValue value)
     {
         if (value.isPressed && count < maxCount)
         {
