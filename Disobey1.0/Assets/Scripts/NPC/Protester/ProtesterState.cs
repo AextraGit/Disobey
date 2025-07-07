@@ -101,7 +101,10 @@ public class ProtesterHuntState : ProtesterState
     public void Enter()
     {
         npc.agent.speed = 2f;
+    }
 
+    public void Update()
+    {
         GameObject closestEnemy = null;
         float minDistance = float.MaxValue;
         Vector3 npcPos = npc.transform.position;
@@ -117,10 +120,7 @@ public class ProtesterHuntState : ProtesterState
         }
 
         target = closestEnemy;
-    }
 
-    public void Update()
-    {
         if (Vector3.Distance(target.transform.position, npc.transform.position) >= 1.0f)
         {
             npc.agent.SetDestination(target.transform.position);
