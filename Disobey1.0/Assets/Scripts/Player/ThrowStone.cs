@@ -51,6 +51,11 @@ public class ThrowStone : MonoBehaviour
         brickRB.AddForce(throwDirection * throwForce);
     }
 
+    public int GetBricksLeft()
+    {
+        return bricksLeft;
+    }
+
     /*
        void OnEnable()
        {

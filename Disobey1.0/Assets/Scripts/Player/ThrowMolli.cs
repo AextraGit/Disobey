@@ -58,4 +58,9 @@ public class ThrowMolli : MonoBehaviour
         Vector3 throwDirection = (mainCamera.transform.forward + Vector3.up * upRotationAdjustment + Vector3.right * leftRotationAdjustment).normalized;
         molliRB.AddForce(throwDirection * throwForce);
     }
+
+    public int GetMollisLeft()
+    {
+        return mollisLeft;
+    }
 }

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CountBricks : MonoBehaviour
+public class CountBricks : MonoBehaviour // but also mollies
 {
     public TextMeshProUGUI countText;
     public float displayMaxCountReached = 4f;
@@ -13,6 +13,7 @@ public class CountBricks : MonoBehaviour
         // countText.text = "Bricks left: " + bricksLeft.ToString();
         countText.text = "Bricks left: " + bricksLeft.ToString() + "\nBricks thrown: " + count.ToString() + "/" + max.ToString();
         // countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
+        // countText.text = "Bricks left: " + bricksLeft.ToString() + "\nMollies left: ";
     }
 
     public IEnumerator UpdateMaxCountReached(int count, int bricksLeft, int max)

@@ -11,6 +11,8 @@ public class Feedback : MonoBehaviour
     public float displayTimeWelcome = 5f;
     public float displayTimeMessages = 3f;
     public float displayMaxCountReached = 4f;
+    public ThrowMolli throwMolli; // Reference to the ThrowMolli script
+    public ThrowStone throwStone; // Reference to the ThrowStone script
 
     public InputActionReference doContinue;
 
@@ -72,8 +74,9 @@ public class Feedback : MonoBehaviour
     public void UpdateCount(int count, int bricksLeft, int max)
     {
         // countText.text = "Bricks left: " + bricksLeft.ToString();
-        countText.text = "Items left: " + bricksLeft.ToString() + "\nItems thrown: " + count.ToString() + "/" + max.ToString();
+        // countText.text = "Items left: " + bricksLeft.ToString() + "\nItems thrown: " + count.ToString() + "/" + max.ToString();
         // countText.text = "Bricks thrown: " + count.ToString() + "/" + max.ToString();
+        countText.text = "Bricks left: " + throwStone.GetBricksLeft() + "\nMollies left: " + throwMolli.GetMollisLeft();
     }
 
     public IEnumerator UpdateMaxCountReached(int count, int bricksLeft, int max)
