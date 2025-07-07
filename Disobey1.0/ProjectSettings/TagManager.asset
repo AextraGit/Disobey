@@ -9,6 +9,8 @@ TagManager:
   - NPC
   - Police
   - Protester
+  - Molli
+  - Ground
   layers:
   - Default
   - TransparentFX
