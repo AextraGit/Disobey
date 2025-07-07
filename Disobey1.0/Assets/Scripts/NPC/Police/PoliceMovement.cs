@@ -28,6 +28,9 @@ public class PoliceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        policeNearby.RemoveAll(npc => npc == null);
+        protestersNearby.RemoveAll(npc => npc == null);
+
         int enemyCount = protestersNearby.Count;
         if (isPlayerNearby) enemyCount++;
 

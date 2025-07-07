@@ -9,7 +9,6 @@ public class ProtesterMovement : MonoBehaviour
     public GameObject player;
     public NavMeshAgent agent;
     private bool isPlayerNearby;
-    private int numberOfPoliceNearby = 0;
     public List<GameObject> policeNearby = new List<GameObject>();
     private ProtesterState currentState;
 
@@ -25,13 +24,15 @@ public class ProtesterMovement : MonoBehaviour
 
     void Update()
     {
-        if (numberOfPoliceNearby > 0)
+        policeNearby.RemoveAll(npc => npc == null);
+
+        if (policeNearby.Count > 0)
         {
             if (!(currentState is ProtesterHuntState))
             {
                 ChangeState(new ProtesterHuntState(this));
             }
-        } else if (numberOfPoliceNearby == 0)
+        } else if (policeNearby.Count == 0)
         {
             if (!(currentState is ProtesterWanderState) && !(currentState is ProtesterSeekState))
             {
@@ -53,7 +54,6 @@ public class ProtesterMovement : MonoBehaviour
         }
         if (other.CompareTag("Police"))
         {
-            numberOfPoliceNearby++;
             policeNearby.Add(other.gameObject);
         }
     }
@@ -69,7 +69,6 @@ public class ProtesterMovement : MonoBehaviour
         }
         if (other.CompareTag("Police"))
         {
-            numberOfPoliceNearby--;
             policeNearby.Remove(other.gameObject);
         }
     }
