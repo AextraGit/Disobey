@@ -25,11 +25,12 @@ public class ProtesterWanderState : ProtesterState
         npc.agent.speed = 1f;
         startLocation = npc.transform.position;
         SetNewWanderLocation();
+        Debug.Log("Entered Wander state");
     }
 
     public void Update()
     {
-        if (Vector3.Distance(npc.transform.position, wanderLocation) <= 1.1)
+        if (Vector3.Distance(npc.transform.position, wanderLocation) <= 1.5)
         {
             SetNewWanderLocation();
         }
@@ -55,7 +56,7 @@ public class ProtesterWanderState : ProtesterState
 
     public void Exit()
     {
-
+        Debug.Log("Exited Wander state");
     }
 }
 

@@ -247,13 +247,19 @@ public class PoliceHuntState : PoliceState
                         npc.animator.SetBool("IsNearEnemy", true);
                         attackCooldown = 1.0f; // 1 Sekunde Cooldown
                     }
-                }
+                    float playerDist = Vector3.Distance(npcPos, player.transform.position);
+                    Debug.Log(playerDist);
+                    
+                        npc.animator.SetBool("IsNearEnemy", true);
+                        attackCooldown = 1.0f; // 1 Sekunde Cooldown
+                        Debug.Log("Hitting state is activated");
+                                    }
             }
                 else
                 {
                     npc.agent.SetDestination(CalculateFlockingVector(player));
                     float playerDist = Vector3.Distance(npcPos, player.transform.position);
-
+                    Debug.Log(playerDist);
                     if (playerDist <= attackRange)
                     {
                         npc.animator.SetBool("IsNearEnemy", true); 
